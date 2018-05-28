@@ -10,9 +10,13 @@ var agendaSchema = new Schema({
     show: {
       type: Boolean,
       default: true
-    }
+    },
+    deadline: String
   }],
-  datum: String,
+  created_At: {
+    type: String
+  },
+  time_created: String,
   deleted : {
     type: Boolean,
     default: false

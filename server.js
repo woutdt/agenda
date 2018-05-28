@@ -55,19 +55,54 @@ function findOne(req, res) {
   });
 };
 
+function timeConversion(millisec) {
+
+        var seconds = (millisec / 1000).toFixed(1);
+
+        var minutes = (millisec / (1000 * 60)).toFixed(1);
+
+        var hours = (millisec / (1000 * 60 * 60)).toFixed(1);
+
+        var days = (millisec / (1000 * 60 * 60 * 24)).toFixed(1);
+
+        if (seconds < 60) {
+            return seconds + " Sec";
+        } else if (minutes < 60) {
+            return minutes + " Min";
+        } else if (hours < 24) {
+            return hours + " Hours";
+        } else {
+            return days + " Days"
+        }
+    }
+
 //get all vakken
-app.get("/", function(req, res) {
-  Agenda.find({}, function(err, data) {
-    if(err) res.json({"message": "sorry something went wrogn..."});
-    res.json(data);
-  });
+app.get("/find", function(req, res) {
+  if(req.query.id) {
+    Agenda.findOne({ '_id': req.query.id }, function(err, data) {
+      if(err) return res.json(errorHandler);
+      var date1 = data.created_At;
+      var date2 = Date.now();
+      var date3 = date2 - date1;
+      var final = timeConversion(date3) + ' Ago'
+      data.time_created = final;
+      return res.json(data);
+    });
+  } else {
+    Agenda.find({}, function(err, data) {
+      if(err) return res.json(errorHandler);
+      res.json(data);
+    });
+  };
 });
 
 //create new vak
 app.post("/new", function(req, res) {
+  var date = Date.now();
   var agenda = new Agenda({
     vak: req.body.vak,
-    important: req.body.important
+    important: req.body.important,
+    created_At: date
   });
 
   agenda.save(function(err) {
