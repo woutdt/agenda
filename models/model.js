@@ -11,7 +11,8 @@ var agendaSchema = new Schema({
       type: Boolean,
       default: true
     },
-    deadline: String
+    deadline: String,
+    time_until_deadline: String
   }],
   created_At: {
     type: String

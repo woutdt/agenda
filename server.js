@@ -84,14 +84,41 @@ app.get("/find", function(req, res) {
       var date1 = data.created_At;
       var date2 = Date.now();
       var date3 = date2 - date1;
-      var final = timeConversion(date3) + ' Ago'
+      var final = timeConversion(date3) + ' Ago';
       data.time_created = final;
+      var l;
+      for(l = 0; l < data.taken.length; l++) {
+        taak = data.taken[l];
+        var datum1 = taak.deadline;
+        var datum2 = Date.now();
+        var datum3 = datum1 - datum2;
+        var finaldate = 'Deadline: '+ timeConversion(datum3);
+        taak.time_until_deadline = finaldate;
+      };
       return res.json(data);
     });
   } else {
     Agenda.find({}, function(err, data) {
       if(err) return res.json(errorHandler);
-      res.json(data);
+      var i;
+      for(i = 0; i < data.length; i++) {
+        vak = data[i];
+        var date1 = vak.created_At;
+        var date2 = Date.now();
+        var date3 = date2 - date1;
+        var final = timeConversion(date3) + ' Ago';
+        vak.time_created = final;
+        var l;
+        for(l = 0; l < data[i].taken.length; l++) {
+          taak = data[i].taken[l];
+          var datum1 = taak.deadline;
+          var datum2 = Date.now();
+          var datum3 = datum1 - datum2;
+          var finaldate = 'Deadline: '+ timeConversion(datum3);
+          taak.time_until_deadline = finaldate;
+        };
+      };
+      return res.json(data);
     });
   };
 });
@@ -116,7 +143,8 @@ app.post("/new", function(req, res) {
 
 //create new task
 app.post("/newTask", function(req, res) {
-  var takenObj = { naam: req.body.taakname };
+  var millisec = Number(req.body.millisec) + Number(Date.now());
+  var takenObj = { naam: req.body.taakname, deadline: millisec };
   Agenda.findOneAndUpdate({ _id: req.query.id}, { $push: { taken: takenObj }}, function(err, data) {
     Agenda.findOne({_id: req.query.id}, function(err, data) {
       if(err) {
@@ -305,7 +333,6 @@ app.delete("/delTask", function(req, res) {
         if(err) res.json({"message": "sorry, something went wrogn"});
       });
       Agenda.findOne({'_id': new mongoose.Types.ObjectId(dataid)}, function(err, docs) {
-        console.log(docs);
         if(err) res.json(errorHandler);
         res.json(docs);
       });
