@@ -1,3 +1,4 @@
+
 var express = require("express");
 var morgan = require("morgan");
 var bodyParser = require("body-parser");
@@ -19,7 +20,7 @@ var errorHandler = {
   "message": "Oops, something went wrogn..."
 };
 
-//check if array values are all the same
+//check array values are equal
 Array.prototype.AllValuesSame = function(){
 
     if(this.length > 0) {
