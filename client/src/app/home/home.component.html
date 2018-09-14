@@ -1,0 +1,12 @@
+<ul>
+    <li *ngFor="let vak of res">
+      {{ vak.vak }}
+      {{ vak.time_created }}
+      <ul>
+        <li *ngFor="let taak of vak.taken">
+          {{ taak.naam }}
+          {{ taak.time_until_deadline }}
+        </li>
+      </ul>
+    </li>
+</ul>
