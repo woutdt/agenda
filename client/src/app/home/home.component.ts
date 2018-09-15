@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   res : any;
+  taak : any;
 
   ngOnInit() {
     this.getData();
@@ -22,6 +23,16 @@ export class HomeComponent implements OnInit {
   alertId(id :any) {
     alert(id);
   };
+
+  checkUndefined(vak: any) {
+    if(vak.taken == 0) {
+      return false;
+    } else if(vak.taken != 0) {
+      return true;
+    } else {
+      alert("error");
+    }
+  }
 
   getData() {
     return this.http.get("http://localhost:3000/find")

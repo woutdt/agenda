@@ -85,7 +85,7 @@ function returnTime(data) {
     var datum1 = taak.deadline;
     var datum2 = Date.now();
     var datum3 = datum1 - datum2;
-    var finaldate = 'Deadline: '+timeConversion(datum3);
+    var finaldate = timeConversion(datum3);
     taak.time_until_deadline = finaldate;
     };
 };

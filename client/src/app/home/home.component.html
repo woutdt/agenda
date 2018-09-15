@@ -3,11 +3,19 @@
   <ul class="ul">
       <div *ngFor="let vak of res" class="vak">
         <li>
-          {{ vak.vak }}
-          {{ vak.time_created }}
-          <p>
-            {{ vak._id }}
-          </p>
+          <div class="header">
+            <p class="head">
+              {{ vak.vak }}
+            </p>
+          </div>
+          <div class="body">
+            <p *ngIf="checkUndefined(vak) == true" class="p">
+              {{ vak.taken[0].naam }}{{ vak.taken[0].time_until_deadline }}
+            </p>
+            <p *ngIf="checkUndefined(vak) == false" class="p">
+              empty
+            </p>
+          </div>
         </li>
       </div>
   </ul>
