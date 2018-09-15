@@ -1,12 +1,15 @@
-<ul>
-    <li *ngFor="let vak of res">
-      {{ vak.vak }}
-      {{ vak.time_created }}
-      <ul>
-        <li *ngFor="let taak of vak.taken">
-          {{ taak.naam }}
-          {{ taak.time_until_deadline }}
+<div class="wrap">
+  <div class="center">
+  <ul class="ul">
+      <div *ngFor="let vak of res" class="vak">
+        <li>
+          {{ vak.vak }}
+          {{ vak.time_created }}
+          <p>
+            {{ vak._id }}
+          </p>
         </li>
-      </ul>
-    </li>
-</ul>
+      </div>
+  </ul>
+ </div>
+</div>

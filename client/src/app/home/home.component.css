@@ -1,0 +1,43 @@
+.vak {
+  text-align: center;
+  position: relative;
+  padding: 15px;
+  margin: 15px;
+  top: 0;
+  display: inline-block;
+  width: 28%;
+  height: 15%;
+  border: 1px solid grey;
+}
+.vak:hover {
+  background-color: #f7f7f7;
+}
+ul {
+  list-style-type: none;
+}
+.ul {
+  left: 1%;
+  right: 1%;
+  font-family: Roboto,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  position: relative;
+}
+.wrap {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  height: calc(100% - 64px);
+  width: 100%;
+}
+.center {
+  left: 15.5%;
+  right: 15.5%;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 69%;
+}

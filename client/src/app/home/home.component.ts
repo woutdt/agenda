@@ -19,6 +19,10 @@ export class HomeComponent implements OnInit {
     this.getData();
   }
 
+  alertId(id :any) {
+    alert(id);
+  };
+
   getData() {
     return this.http.get("http://localhost:3000/find")
       .subscribe(data => {
